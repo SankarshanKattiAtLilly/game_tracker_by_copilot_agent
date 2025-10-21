@@ -1,0 +1,68 @@
+[
+  {
+    "id": "m1",
+    "team1": "Lions",
+    "team2": "Tigers",
+    "startTime": "2025-10-21T10:00:00Z",
+    "endTime": "2025-10-21T12:00:00Z",
+    "state": "started",
+    "weight": 5,
+    "winnerTeam": null,
+    "draw": false
+  },
+  {
+    "id": "m2",
+    "team1": "Eagles",
+    "team2": "Sharks",
+    "startTime": "2025-10-21T18:00:00Z",
+    "endTime": "2025-10-21T20:00:00Z",
+    "state": "planned",
+    "weight": 3,
+    "winnerTeam": null,
+    "draw": false
+  },
+  {
+    "id": "m3",
+    "team1": "Lions",
+    "team2": "Eagles",
+    "startTime": "2025-10-21T11:30:00Z",
+    "endTime": "2025-10-21T13:30:00Z",
+    "state": "started",
+    "weight": 4,
+    "winnerTeam": null,
+    "draw": false
+  },
+  {
+    "id": "m4",
+    "team1": "Tigers",
+    "team2": "Sharks",
+    "startTime": "2025-10-19T15:00:00Z",
+    "endTime": "2025-10-19T17:00:00Z",
+    "state": "ended",
+    "weight": 5,
+    "winnerTeam": "Tigers",
+    "draw": false
+  },
+  {
+    "id": "m5",
+    "team1": "Lions",
+    "team2": "Sharks",
+    "startTime": "2025-10-18T16:00:00Z",
+    "endTime": "2025-10-18T18:00:00Z",
+    "state": "ended",
+    "weight": 3,
+    "winnerTeam": "Lions",
+    "draw": false
+  },
+  {
+    "id": "m6",
+    "team1": "Eagles",
+    "team2": "Tigers",
+    "startTime": "2025-10-17T14:00:00Z",
+    "endTime": "2025-10-17T16:00:00Z",
+    "state": "ended",
+    "weight": 4,
+    "winnerTeam": "Tigers",
+    "draw": false
+  }
+]
