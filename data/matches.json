@@ -5,7 +5,7 @@
     "team2": "Tigers",
     "startTime": "2025-10-21T10:00:00Z",
     "endTime": "2025-10-21T12:00:00Z",
-    "state": "started",
+    "state": "ended",
     "weight": 5,
     "winnerTeam": null,
     "draw": false
@@ -16,7 +16,7 @@
     "team2": "Sharks",
     "startTime": "2025-10-21T18:00:00Z",
     "endTime": "2025-10-21T20:00:00Z",
-    "state": "planned",
+    "state": "ended",
     "weight": 3,
     "winnerTeam": null,
     "draw": false
@@ -27,7 +27,7 @@
     "team2": "Eagles",
     "startTime": "2025-10-21T11:30:00Z",
     "endTime": "2025-10-21T13:30:00Z",
-    "state": "started",
+    "state": "ended",
     "weight": 4,
     "winnerTeam": null,
     "draw": false
