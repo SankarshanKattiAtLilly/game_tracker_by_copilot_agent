@@ -15,3 +15,10 @@
 .loading, .error { padding: 8px; }
 .back-link { display: inline-block; margin-top: 8px; }
 @media (min-width: 1200px) { .summary-cards { grid-template-columns: repeat(6, 1fr); } }
+
+.toolbar { padding: 12px; margin-bottom: 16px; }
+.toolbar-row { display: grid; grid-template-columns: 1.6fr 1fr auto; align-items: center; gap: 12px; }
+.filters { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.filters label { display: flex; align-items: center; gap: 6px; }
+.toolbar select, .toolbar input { padding: 8px 10px; border: 1px solid #e5e7eb; border-radius: 8px; }
+.quick-links { display: flex; gap: 8px; justify-content: flex-end; }

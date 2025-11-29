@@ -90,6 +90,21 @@
   align-items: center;
   gap: 8px;
   padding-bottom: 12px;
+
+.user-outcome-pill {
+  justify-self: end;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid var(--border);
+}
+.user-outcome-pill.bet-placed { background: #e0f2fe; color: #075985; }
+.user-outcome-pill.yet-to-bet { background: #f3f4f6; color: #374151; }
+.user-outcome-pill.no-bet { background: #f3f4f6; color: #6b7280; }
+.user-outcome-pill.won { background: #dcfce7; color: #065f46; }
+.user-outcome-pill.lost { background: #fee2e2; color: #991b1b; }
+.user-outcome-pill.no-penalty { background: #fef9c3; color: #854d0e; }
+.user-outcome-pill.draw { background: #ede9fe; color: #5b21b6; }
   border-bottom: 1px solid #e5e7eb;
 }
 

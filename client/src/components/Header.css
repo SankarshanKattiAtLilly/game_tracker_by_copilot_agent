@@ -1,9 +1,21 @@
-.site-header { position: sticky; top: 0; z-index: 10; background: #111827; color: #fff; border-bottom: 1px solid #1f2937; }
-.header-inner { max-width: 1100px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; }
-.brand-link { color: #fff; text-decoration: none; font-weight: 600; }
-.nav { display: flex; gap: 12px; }
-.nav-link { color: #e5e7eb; text-decoration: none; padding: 6px 8px; border-radius: 6px; }
-.nav-link.active { background: #374151; color: #fff; }
-.actions { display: flex; gap: 8px; }
-.logout-button { background: #b00020; color: #fff; border: none; border-radius: 6px; padding: 6px 10px; cursor: pointer; }
-.logout-button:hover { opacity: 0.9; }
+.site-header { width: 100%; background: #0b1220; color: #fff; }
+.header-inner { width: 100%; padding: 12px 16px; display: flex; align-items: center; gap: 16px; }
+.brand { display: flex; align-items: center; gap: 10px; margin-right: auto; }
+.brand-link { color: #fff; text-decoration: none; font-weight: 800; letter-spacing: 0.2px; font-size: 18px; }
+.nav { display: flex; gap: 8px; padding: 4px; border-radius: 10px; }
+.nav-link { color: #ffffff; text-decoration: none; padding: 8px 12px; border-radius: 8px; font-weight: 600; }
+.nav-link:hover { background: rgba(255,255,255,0.18); }
+.nav-link.active { background: #2563eb; color: #fff; }
+.actions { display: flex; gap: 10px; align-items: center; }
+.right-actions { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.user-pill { color: #cbd5e1; font-size: 14px; padding: 4px 8px; border-radius: 999px; background: rgba(255,255,255,0.12); }
+.logout-button { background: #ef4444; color: #fff; border: 1px solid rgba(255,255,255,0.25); border-radius: 8px; padding: 8px 12px; cursor: pointer; font-weight: 700; box-shadow: 0 2px 6px rgba(0,0,0,0.25); }
+.logout-button:hover { background: #dc2626; }
+
+@media (max-width: 768px) {
+	.header-inner { padding: 10px 12px; }
+	.brand-link { font-size: 16px; }
+	.nav { gap: 4px; }
+	.nav-link { padding: 6px 8px; font-size: 14px; }
+	.actions { gap: 8px; }
+}

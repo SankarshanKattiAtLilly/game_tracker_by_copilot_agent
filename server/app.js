@@ -8,6 +8,7 @@ const matchesRoutes = require('./routes/matches');
 const betsRoutes = require('./routes/bets');
 const contestsRoutes = require('./routes/contests');
 const usersRoutes = require('./routes/users');
+const debugRoutes = require('./routes/debug');
 const CSVSync = require('./utils/csvSync');
 const { updateMatchStates } = require('./utils/data');
 
@@ -44,6 +45,14 @@ app.use('/matches', matchesRoutes);
 app.use('/matches', betsRoutes); // Mount bets routes under /matches for RESTful structure
 app.use('/bets', betsRoutes); // Also mount under /bets for compatibility
 app.use('/users', usersRoutes);
+// Master stats under /admin
+try {
+  const { adminRouter } = require('./routes/users');
+  app.use('/admin', adminRouter);
+} catch (e) {
+  console.warn('Admin router not available', e.message);
+}
+app.use('/debug', debugRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {

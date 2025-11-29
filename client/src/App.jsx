@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard';
 import './App.css';
 import RoutePersistence from './components/RoutePersistence';
 import Header from './components/Header';
+import MasterDashboard from './pages/MasterDashboard';
 
 function App() {
   return (
@@ -48,6 +49,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <MatchDetails />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/admin/dashboard" 
+              element={
+                <ProtectedRoute>
+                  <MasterDashboard />
                 </ProtectedRoute>
               } 
             />

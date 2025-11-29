@@ -111,6 +111,11 @@ class ApiClient {
   async getUserStats() {
     return this.request('/users/me/stats');
   }
+
+  // Admin endpoints
+  async getAllUsersStats() {
+    return this.request('/admin/stats/all');
+  }
 }
 
 export const apiClient = new ApiClient();

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { apiClient } from '../api/client';
 import './MatchCard.css';
 
-const MatchCard = ({ match, userBet, onBetUpdate }) => {
+const MatchCard = ({ match, userBet, winnersCount = 0, onBetUpdate }) => {
   const [isPlacingBet, setIsPlacingBet] = useState(false);
   const [error, setError] = useState(null);
 
@@ -72,6 +72,30 @@ const MatchCard = ({ match, userBet, onBetUpdate }) => {
   const startDateTime = formatDateTime(match.startTime);
   const hasUserBet = userBet && !userBet.isDefault;
 
+  const getUserOutcome = () => {
+    // If match ended and user didn't bet, reflect outcome appropriately
+    if (!userBet) {
+      if (match.state === 'ended') {
+        if (match.draw) return 'draw';
+        // No winners on winning team → no penalty for anyone
+        if (winnersCount === 0) return 'no-penalty';
+        // Ended but user had no bet
+        return 'no-bet';
+      }
+      return 'yet-to-bet';
+    }
+    if (match.state === 'ended') {
+      if (match.draw) return 'draw';
+      if (userBet.team === match.winnerTeam) return 'won';
+      // if no one bet on winning team, no penalty scenario
+      if (winnersCount === 0) return 'no-penalty';
+      return 'lost';
+    }
+    return 'bet-placed';
+  };
+
+  const outcome = getUserOutcome();
+
   return (
     <div className={`match-card ${status}`}>
       <div className="match-header">
@@ -98,6 +122,15 @@ const MatchCard = ({ match, userBet, onBetUpdate }) => {
           {status === 'ended' && (
             match.draw ? 'Draw' : `Winner: ${match.winnerTeam}`
           )}
+        </div>
+        <div className={`user-outcome-pill ${outcome}`}>
+          {outcome === 'yet-to-bet' && 'Yet to bet'}
+          {outcome === 'no-bet' && 'No bet'}
+          {outcome === 'bet-placed' && 'Bet placed'}
+          {outcome === 'won' && 'You won'}
+          {outcome === 'lost' && 'You lost'}
+          {outcome === 'no-penalty' && 'No penalty'}
+          {outcome === 'draw' && 'Draw'}
         </div>
       </div>
 

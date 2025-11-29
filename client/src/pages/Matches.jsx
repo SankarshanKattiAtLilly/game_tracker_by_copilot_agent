@@ -111,11 +111,20 @@ const Matches = () => {
           <div className="matches-list">
             {sortedMatches.map((match) => (
               <div key={match.id} className="match-item">
+                {(() => {
+                  const matchBets = bets.filter(b => b.matchId === match.id);
+                  const winnersCount = (match.state === 'ended' && !match.draw)
+                    ? matchBets.filter(b => b.team === match.winnerTeam).length
+                    : 0;
+                  return (
                 <MatchCard
                   match={match}
                   userBet={getUserBetForMatch(match.id)}
+                  winnersCount={winnersCount}
                   onBetUpdate={handleBetUpdate}
                 />
+                  );
+                })()}
                 {(match.state === 'ended' || match.state === 'started') && (
                   <div className="match-details-link">
                     <Link to={`/match/${match.id}`} state={{ contestId }} className="details-button">
