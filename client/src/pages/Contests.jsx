@@ -5,6 +5,7 @@ import './Contests.css';
 
 const Contests = () => {
   const [contests, setContests] = useState([]);
+  const [activeTab, setActiveTab] = useState('running'); // running | upcoming | completed
   const [contestStats, setContestStats] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -84,21 +85,49 @@ const Contests = () => {
     );
   }
 
+  const filteredContests = contests.filter(c => {
+    if (activeTab === 'running') return c.status === 'active' || c.status === 'running';
+    if (activeTab === 'upcoming') return c.status === 'upcoming' || c.status === 'planned';
+    if (activeTab === 'completed') return c.status === 'completed' || c.status === 'ended';
+    return true;
+  });
+
   return (
     <div className="contests-container">
-      <div className="contests-content">
+      <div className="contests-content page-container">
         <div className="contests-header">
           <h1>Contests</h1>
           <p>Choose a contest to view matches and place bets</p>
         </div>
 
-        {contests.length === 0 ? (
+        <div className="contest-tabs">
+          <button
+            className={`contest-tab ${activeTab === 'upcoming' ? 'active' : ''}`}
+            onClick={() => setActiveTab('upcoming')}
+          >
+            Upcoming
+          </button>
+          <button
+            className={`contest-tab ${activeTab === 'running' ? 'active' : ''}`}
+            onClick={() => setActiveTab('running')}
+          >
+            Running
+          </button>
+          <button
+            className={`contest-tab ${activeTab === 'completed' ? 'active' : ''}`}
+            onClick={() => setActiveTab('completed')}
+          >
+            Completed
+          </button>
+        </div>
+
+        {filteredContests.length === 0 ? (
           <div className="no-contests">
-            <p>No contests available at the moment.</p>
+            <p>No contests in this category.</p>
           </div>
         ) : (
           <div className="contests-grid">
-          {contests.map(contest => {
+          {filteredContests.map(contest => {
             const stats = contestStats[contest.id];
             return (
               <div key={contest.id} className="contest-card">

@@ -15,3 +15,23 @@ m14,Eagles,Panthers,2025-11-21T19:30:00Z,2025-11-21T21:00:00Z,ended,5,,true,c3
 m15,Tigers,Sharks,2025-11-22T09:00:00Z,2025-11-22T11:00:00Z,ended,4,Tigers,false,c3
 m16,Lions,Eagles,2025-11-23T13:00:00Z,2025-11-23T15:00:00Z,ended,3,Lions,false,c3
 m17,Lions,Eagles,2025-11-25T09:00:00Z,2025-11-25T11:00:00Z,ended,10,Eagles,false,c3
+m1001,Bangalore,Mumbai,2026-02-01T09:00:00Z,2026-02-01T11:00:00Z,planned,4,,false,c5
+m1002,Chennai,Delhi,2026-02-01T14:00:00Z,2026-02-01T16:00:00Z,planned,4,,false,c5
+m1003,Kolkata,Royal Challengers,2026-02-02T09:00:00Z,2026-02-02T11:00:00Z,planned,3,,false,c5
+m1004,Bangalore,Chennai,2026-02-02T14:00:00Z,2026-02-02T16:00:00Z,planned,5,,false,c5
+m1005,Delhi,Mumbai,2026-02-03T09:00:00Z,2026-02-03T11:00:00Z,planned,4,,false,c5
+m1006,Kolkata,Chennai,2026-02-03T14:00:00Z,2026-02-03T16:00:00Z,planned,3,,false,c5
+m1007,Royal Challengers,Delhi,2026-02-04T09:00:00Z,2026-02-04T11:00:00Z,planned,5,,false,c5
+m1008,Mumbai,Kolkata,2026-02-04T14:00:00Z,2026-02-04T16:00:00Z,planned,4,,false,c5
+m1009,Bangalore,Delhi,2026-02-05T09:00:00Z,2026-02-05T11:00:00Z,planned,4,,false,c5
+m1010,Chennai,Royal Challengers,2026-02-05T14:00:00Z,2026-02-05T16:00:00Z,planned,4,,false,c5
+m1011,Mumbai,Delhi,2026-02-06T09:00:00Z,2026-02-06T11:00:00Z,planned,3,,false,c5
+m1012,Bangalore,Kolkata,2026-02-06T14:00:00Z,2026-02-06T16:00:00Z,planned,5,,false,c5
+m1013,Chennai,Mumbai,2026-02-07T09:00:00Z,2026-02-07T11:00:00Z,planned,4,,false,c5
+m1014,Royal Challengers,Kolkata,2026-02-07T14:00:00Z,2026-02-07T16:00:00Z,planned,3,,false,c5
+m1015,Delhi,Chennai,2026-02-08T09:00:00Z,2026-02-08T11:00:00Z,planned,5,,false,c5
+m1016,Mumbai,Royal Challengers,2026-02-08T14:00:00Z,2026-02-08T16:00:00Z,planned,4,,false,c5
+m1017,Kolkata,Delhi,2026-02-09T09:00:00Z,2026-02-09T11:00:00Z,planned,4,,false,c5
+m1018,Bangalore,Chennai,2026-02-09T14:00:00Z,2026-02-09T16:00:00Z,planned,4,,false,c5
+m1019,Royal Challengers,Mumbai,2026-02-10T09:00:00Z,2026-02-10T11:00:00Z,planned,5,,false,c5
+m1020,Delhi,Bangalore,2026-02-10T14:00:00Z,2026-02-10T16:00:00Z,planned,3,,false,c5

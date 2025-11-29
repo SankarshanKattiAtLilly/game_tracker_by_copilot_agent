@@ -73,7 +73,7 @@ export default function Dashboard() {
   }, [stats, filter, search, sortBy]);
 
   if (loading) {
-    return <div className="dashboard-container"><div className="loading">Loading dashboard…</div></div>;
+    return <div className="dashboard-container"><div className="loading page-container">Loading dashboard…</div></div>;
   }
 
   if (error) {
@@ -89,7 +89,7 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-container">
-      <div className="dashboard-content">
+      <div className="dashboard-content page-container">
         <div className="header">
           <h1>My Betting Dashboard</h1>
           <p>Overview for <strong>{stats.username}</strong></p>

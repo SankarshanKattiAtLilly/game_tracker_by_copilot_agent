@@ -1,3 +1,7 @@
+// Force-enable CSV sync by default unless explicitly disabled
+if (!process.env.ENABLE_CSV_SYNC) {
+  process.env.ENABLE_CSV_SYNC = 'true';
+}
 const { app, initializeBackgroundProcesses } = require('./app');
 
 const PORT = process.env.PORT || 3001;
@@ -7,6 +11,7 @@ const server = app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📊 Health check: http://localhost:${PORT}/health`);
   console.log(`🔐 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`📄 CSV Sync Enabled: ${process.env.ENABLE_CSV_SYNC === 'true'}`);
   
   // Initialize background processes
   initializeBackgroundProcesses();

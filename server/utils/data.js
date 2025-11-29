@@ -169,6 +169,11 @@ const saveTeams = (teams) => {
   return writeJSONFile('teams.json', teams);
 };
 
+// Save contests
+const saveContests = (contests) => {
+  return writeJSONFile('contests.json', contests);
+};
+
 // Save bets
 const saveBets = (bets) => {
   return writeJSONFile('bets.json', bets);
@@ -401,5 +406,6 @@ module.exports = {
   getContests,
   getContest,
   getContestMatches,
-  getContestStats
+  getContestStats,
+  saveContests
 };

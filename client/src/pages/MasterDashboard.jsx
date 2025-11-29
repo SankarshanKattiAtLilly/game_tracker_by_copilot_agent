@@ -29,15 +29,15 @@ export default function MasterDashboard() {
     return data.users.filter(u => !q || u.username.toLowerCase().includes(q));
   }, [data, query]);
 
-  if (loading) return <div className="master-container"><div className="loading">Loading…</div></div>;
-  if (error) return <div className="master-container"><div className="error">{error}</div></div>;
+  if (loading) return <div className="master-container"><div className="loading page-container">Loading…</div></div>;
+  if (error) return <div className="master-container"><div className="error page-container">{error}</div></div>;
   if (!data) return null;
 
   const L = data.leaders || {};
 
   return (
     <div className="master-container">
-      <div className="master-content">
+      <div className="master-content page-container">
         <div className="header">
           <h1>All Users Dashboard</h1>
           <p>Platform-wide stats and leaders</p>

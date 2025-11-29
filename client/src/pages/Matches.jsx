@@ -85,7 +85,7 @@ const Matches = () => {
   return (
     <div className="matches-container">
       <header className="matches-header">
-        <div className="header-content">
+        <div className="header-content page-container">
           <div className="header-title">
             <Link to="/contests" className="back-link">← Back to Contests</Link>
             <h1>🎯 {contest?.name || 'Loading...'}</h1>
@@ -102,7 +102,7 @@ const Matches = () => {
         </div>
       </header>
 
-      <main className="matches-content">
+      <main className="matches-content page-container">
         {sortedMatches.length === 0 ? (
           <div className="no-matches">
             <p>No matches available</p>

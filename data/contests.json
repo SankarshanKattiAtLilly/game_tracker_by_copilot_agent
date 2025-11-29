@@ -42,5 +42,16 @@
     "totalMatches": 6,
     "completedMatches": 1,
     "totalGamePoints": 45
+  },
+  {
+    "id": "c5",
+    "name": "IPL League - 2026",
+    "description": "Upcoming cricket league with 20 matches (2 per day).",
+    "startDate": "2026-02-01T00:00:00Z",
+    "endDate": "2026-02-26T23:59:59Z",
+    "status": "upcoming",
+    "totalMatches": 20,
+    "completedMatches": 0,
+    "totalGamePoints": 80
   }
 ]

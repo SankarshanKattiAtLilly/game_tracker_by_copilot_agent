@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const csv = require('csv-parser');
-const { saveUsers, saveTeams, saveMatches, assignDefaultBets, getMatches } = require('./data');
+const { saveUsers, saveTeams, saveMatches, assignDefaultBets, getMatches, saveContests, getContests } = require('./data');
 
 class CSVSync {
   constructor() {
@@ -10,7 +10,8 @@ class CSVSync {
     this.csvFiles = {
       users: path.join(this.csvDir, 'users.csv'),
       teams: path.join(this.csvDir, 'teams.csv'),
-      matches: path.join(this.csvDir, 'matches.csv')
+      matches: path.join(this.csvDir, 'matches.csv'),
+      contests: path.join(this.csvDir, 'contests.csv')
     };
   }
 
@@ -115,6 +116,38 @@ class CSVSync {
     }
   }
 
+  // Parse contests from CSV
+  async syncContests() {
+    try {
+      const contestData = await this.readCSV(this.csvFiles.contests);
+      if (!contestData || contestData.length === 0) {
+        console.log('ℹ️ No contests.csv found or empty; skipping contest sync');
+        return [];
+      }
+      const existing = await getContests();
+      const contests = contestData.map(row => {
+        const prev = existing.find(c => c.id === row.id) || {};
+        return {
+          id: row.id,
+          name: row.name,
+          description: row.description || prev.description || '',
+          startDate: row.startDate,
+          endDate: row.endDate,
+          status: row.status || prev.status || 'upcoming',
+          totalMatches: parseInt(row.totalMatches || prev.totalMatches || 0),
+          completedMatches: parseInt(row.completedMatches || prev.completedMatches || 0),
+          totalGamePoints: parseInt(row.totalGamePoints || prev.totalGamePoints || 0)
+        };
+      });
+      await saveContests(contests);
+      console.log(`✅ Synced ${contests.length} contests from CSV`);
+      return contests;
+    } catch (error) {
+      console.error('❌ Error syncing contests from CSV:', error);
+      return null;
+    }
+  }
+
   // Sync all data from CSV files
   async syncFromCSV() {
     console.log('📁 Starting sync from CSV files...');
@@ -122,9 +155,10 @@ class CSVSync {
     try {
       const users = await this.syncUsers();
       const teams = await this.syncTeams();
+      const contests = await this.syncContests();
       const matches = await this.syncMatches();
 
-      if (users && teams && matches) {
+      if (users && teams && contests && matches) {
         console.log('✅ CSV sync completed successfully');
         return true;
       } else {
@@ -140,7 +174,7 @@ class CSVSync {
   // Write current JSON data to CSV files (for backup/export)
   async exportToCSV() {
     try {
-      const { getUsers, getTeams, getMatches } = require('./data');
+      const { getUsers, getTeams, getMatches, getContests } = require('./data');
       
       // Ensure CSV directory exists
       if (!fs.existsSync(this.csvDir)) {
@@ -164,6 +198,12 @@ class CSVSync {
       const matchesCsv = 'id,contestId,team1,team2,startTime,endTime,state,weight,winnerTeam,draw\n' +
         matches.map(m => `${m.id},${m.contestId || ''},${m.team1},${m.team2},${m.startTime},${m.endTime},${m.state},${m.weight},${m.winnerTeam || ''},${m.draw}`).join('\n');
       fs.writeFileSync(this.csvFiles.matches, matchesCsv);
+
+      // Export contests
+      const contests = await getContests();
+      const contestsCsv = 'id,name,description,startDate,endDate,status,totalMatches,completedMatches,totalGamePoints\n' +
+        contests.map(c => `${c.id},${c.name},${c.description || ''},${c.startDate},${c.endDate},${c.status || ''},${c.totalMatches || 0},${c.completedMatches || 0},${c.totalGamePoints || 0}`).join('\n');
+      fs.writeFileSync(this.csvFiles.contests, contestsCsv);
 
       console.log('📤 Data exported to CSV files successfully');
       return true;
