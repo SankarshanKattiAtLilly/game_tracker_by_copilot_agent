@@ -5,6 +5,8 @@
   justify-content: center;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .login-card {
@@ -14,6 +16,24 @@
   padding: 40px;
   width: 100%;
   max-width: 400px;
+}
+
+/* Laptop and larger screens */
+@media (min-width: 1024px) {
+  .login-card {
+    max-width: 500px;
+    padding: 60px;
+  }
+  
+  .login-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .form-group input,
+  .login-button {
+    padding: 16px 20px;
+    font-size: 18px;
+  }
 }
 
 .login-header {

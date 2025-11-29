@@ -2,22 +2,44 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Login from './pages/Login';
+import Contests from './pages/Contests';
 import Matches from './pages/Matches';
 import MatchDetails from './pages/MatchDetails';
+import Dashboard from './pages/Dashboard';
 import './App.css';
+import RoutePersistence from './components/RoutePersistence';
+import Header from './components/Header';
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <div className="App">
+          <RoutePersistence />
+          <Header />
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route 
-              path="/matches" 
+              path="/contests" 
+              element={
+                <ProtectedRoute>
+                  <Contests />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/contest/:contestId" 
               element={
                 <ProtectedRoute>
                   <Matches />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/dashboard" 
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
                 </ProtectedRoute>
               } 
             />
@@ -29,7 +51,7 @@ function App() {
                 </ProtectedRoute>
               } 
             />
-            <Route path="/" element={<Navigate to="/matches" replace />} />
+            <Route path="/" element={<Navigate to="/contests" replace />} />
           </Routes>
         </div>
       </Router>

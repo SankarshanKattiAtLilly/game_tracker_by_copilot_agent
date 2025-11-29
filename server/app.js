@@ -6,12 +6,16 @@ require('dotenv').config();
 const authRoutes = require('./routes/auth');
 const matchesRoutes = require('./routes/matches');
 const betsRoutes = require('./routes/bets');
+const contestsRoutes = require('./routes/contests');
+const usersRoutes = require('./routes/users');
 const CSVSync = require('./utils/csvSync');
 const { updateMatchStates } = require('./utils/data');
 
 const app = express();
 
 // Middleware
+// Disable ETag to avoid 304 with empty cached bodies in dev
+app.disable('etag');
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
     ? ['https://yourdomain.com'] 
@@ -35,9 +39,11 @@ app.use(session({
 
 // Routes
 app.use('/auth', authRoutes);
+app.use('/contests', contestsRoutes);
 app.use('/matches', matchesRoutes);
 app.use('/matches', betsRoutes); // Mount bets routes under /matches for RESTful structure
 app.use('/bets', betsRoutes); // Also mount under /bets for compatibility
+app.use('/users', usersRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
@@ -66,10 +72,14 @@ const initializeBackgroundProcesses = () => {
     updateMatchStates();
   }, 60 * 1000); // 1 minute
 
-  // Initialize CSV sync
-  const csvSync = new CSVSync();
-  csvSync.startPeriodicSync();
-  csvSync.startFileWatcher();
+  // Initialize CSV sync (optional)
+  if (process.env.ENABLE_CSV_SYNC === 'true') {
+    const csvSync = new CSVSync();
+    csvSync.startPeriodicSync();
+    csvSync.startFileWatcher();
+  } else {
+    console.log('📄 CSV sync disabled (set ENABLE_CSV_SYNC=true to enable)');
+  }
 };
 
 module.exports = { app, initializeBackgroundProcesses };

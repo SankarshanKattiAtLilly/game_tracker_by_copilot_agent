@@ -1,12 +1,33 @@
 .match-details-container {
   min-height: 100vh;
   background: #f9fafb;
-  padding: 20px;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .match-details-content {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 32px;
+}
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+  /* Laptop screens */
+  .match-details-content {
+    max-width: 900px;
+    padding: 0 40px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .match-details-content {
+    max-width: 95%;
+    padding: 0 20px;
+  }
 }
 
 .loading, .error {
@@ -69,8 +90,27 @@
   margin-bottom: 16px;
 }
 
+.match-header-details {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
 .match-id-details {
   background: #667eea;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+}
+
+.contest-info {
+  background: #f59e0b;
   color: white;
   padding: 6px 16px;
   border-radius: 20px;
@@ -238,6 +278,31 @@
 .winner-badge {
   margin-left: auto;
   font-size: 18px;
+}
+
+/* Reward Display Styles */
+.potential-reward,
+.actual-reward {
+  font-weight: 600;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+.potential-reward {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.actual-reward.winner {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.actual-reward.loser {
+  background: #fee2e2;
+  color: #dc2626;
 }
 
 .no-bets {
@@ -413,6 +478,11 @@
 @media (max-width: 768px) {
   .match-details-container {
     padding: 16px;
+  }
+
+  .match-details-content {
+    max-width: 100%;
+    margin: 0;
   }
 
   .match-info-card, .betting-summary {

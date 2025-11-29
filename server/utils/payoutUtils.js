@@ -28,6 +28,13 @@ function calculatePayouts(bets, winnerTeam, weight, isDraw = false) {
       rewardPerWinner: 0,
       winners: [],
       losers: bets.map(bet => bet.username),
+      payouts: bets.map(bet => ({
+        username: bet.username,
+        team: bet.team,
+        reward: 0,
+        isWinner: false,
+        isDefault: bet.isDefault || false
+      })),
       summary: {
         totalBets: bets.length,
         winningBets: 0,
@@ -51,6 +58,14 @@ function calculatePayouts(bets, winnerTeam, weight, isDraw = false) {
     rewardPerWinner,
     winners,
     losers,
+    payouts: bets.map(bet => ({
+      username: bet.username,
+      team: bet.team,
+      // If W = 0 (no winners), no rewards and no penalties
+      reward: W === 0 ? 0 : (bet.team === winnerTeam ? rewardPerWinner : -weight),
+      isWinner: bet.team === winnerTeam,
+      isDefault: bet.isDefault || false
+    })),
     summary: {
       totalBets: bets.length,
       winningBets: W,
@@ -92,13 +107,13 @@ function calculatePotentialPayouts(bets, weight, teams) {
       payouts: bets.map(bet => ({
         username: bet.username,
         team: bet.team,
-        potentialReward: bet.team === team ? rewardPerWinner : 0,
+        potentialReward: W === 0 ? 0 : (bet.team === team ? rewardPerWinner : -weight),
         wouldWin: bet.team === team,
         isDefault: bet.isDefault || false
       })),
       summary: {
         message: W === 0 
-          ? `If ${team} wins: No one bet on ${team} - no rewards`
+          ? `If ${team} wins: No winners on ${team} - no rewards/penalties`
           : `If ${team} wins: ${W} winner(s) share ${totalPool} points (${rewardPerWinner.toFixed(1)} each)`
       }
     };

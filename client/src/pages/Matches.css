@@ -1,6 +1,16 @@
 .matches-container {
   min-height: 100vh;
   background: #f9fafb;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.matches-wrapper {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 15px;
+  box-sizing: border-box;
 }
 
 .matches-header {
@@ -13,12 +23,55 @@
 }
 
 .header-content {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+  /* Laptop screens */
+  .header-content {
+    max-width: 900px;
+    padding: 0 40px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .header-content {
+    max-width: 95%;
+    padding: 0 20px;
+  }
+}
+
+.back-link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: #2563eb;
+}
+
+.back-link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: #2563eb;
 }
 
 .header-title h1 {
@@ -71,9 +124,26 @@
 }
 
 .matches-content {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 24px 20px;
+  padding: 24px 32px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+  /* Laptop screens */
+  .matches-content {
+    max-width: 900px;
+    padding: 32px 40px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .matches-content {
+    max-width: 95%;
+    padding: 24px 20px;
+  }
 }
 
 .loading {
@@ -117,13 +187,37 @@
 }
 
 .matches-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .matches-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Laptop */
+@media (min-width: 1024px) {
+  .matches-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop XL */
+@media (min-width: 1440px) {
+  .matches-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .match-item {
   position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .match-details-link {
@@ -151,10 +245,14 @@
 @media (max-width: 768px) {
   .header-content {
     padding: 0 16px;
+    max-width: 100%;
+    margin: 0;
   }
   
   .matches-content {
     padding: 16px;
+    max-width: 100%;
+    margin: 0;
   }
   
   .header-title h1 {

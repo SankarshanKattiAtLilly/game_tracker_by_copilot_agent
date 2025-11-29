@@ -4,6 +4,107 @@ const { calculatePayouts } = require('./payoutUtils');
 
 const DATA_DIR = path.join(__dirname, '../../data');
 
+// Contest functions
+const getContests = () => {
+  return readJSONFile('contests.json');
+};
+
+const getContest = (contestId) => {
+  const contests = getContests();
+  return contests.find(contest => contest.id === contestId);
+};
+
+const getContestMatches = (contestId) => {
+  const matches = getMatches();
+  const contest = getContest(contestId);
+  if (!contest) {
+    return [];
+  }
+
+  // Primary: explicit contestId match
+  const linked = matches.filter(match => match.contestId === contestId);
+  if (linked.length > 0) {
+    return linked;
+  }
+
+  // Fallback: match within contest date window when contestId missing
+  try {
+    const start = new Date(contest.startDate).getTime();
+    const end = new Date(contest.endDate).getTime();
+    const windowed = matches.filter(m => {
+      const st = new Date(m.startTime).getTime();
+      return st >= start && st <= end;
+    });
+    return windowed;
+  } catch (e) {
+    console.error('Error computing contest date range fallback:', e);
+    return [];
+  }
+};
+
+const getContestStats = (contestId) => {
+  const matches = getContestMatches(contestId);
+  const bets = getBets();
+  const results = getResults();
+  
+  // Filter bets for this contest
+  const contestBets = bets.filter(bet => 
+    matches.some(match => match.id === bet.matchId)
+  );
+  
+  // Calculate user statistics
+  const userStats = {};
+  
+  contestBets.forEach(bet => {
+    if (!userStats[bet.username]) {
+      userStats[bet.username] = {
+        username: bet.username,
+        totalBets: 0,
+        wins: 0,
+        losses: 0,
+        totalRewards: 0
+      };
+    }
+    
+    userStats[bet.username].totalBets++;
+    
+    // Check if this match has ended and calculate win/loss
+    const match = matches.find(m => m.id === bet.matchId);
+    if (match && match.state === 'ended' && !match.draw) {
+      if (bet.team === match.winnerTeam) {
+        userStats[bet.username].wins++;
+        // Add reward from results if available
+        const matchResult = results.find(r => r.matchId === bet.matchId);
+        if (matchResult && matchResult.payouts) {
+          const userPayout = matchResult.payouts.payouts.find(p => p.username === bet.username);
+          if (userPayout) {
+            userStats[bet.username].totalRewards += userPayout.reward;
+          }
+        }
+      } else {
+        userStats[bet.username].losses++;
+      }
+    }
+  });
+  
+  const statsArray = Object.values(userStats);
+  
+  // Find max wins and max losses
+  const maxWins = Math.max(...statsArray.map(u => u.wins), 0);
+  const maxLosses = Math.max(...statsArray.map(u => u.losses), 0);
+  
+  const topWinner = statsArray.find(u => u.wins === maxWins && maxWins > 0);
+  const topLoser = statsArray.find(u => u.losses === maxLosses && maxLosses > 0);
+  
+  return {
+    userStats: statsArray,
+    topWinner,
+    topLoser,
+    totalUsers: statsArray.length,
+    totalBets: contestBets.length
+  };
+};
+
 // Helper function to read JSON file
 const readJSONFile = (filename) => {
   try {
@@ -94,7 +195,8 @@ const updateMatchStates = () => {
     const startTime = new Date(match.startTime);
     const endTime = new Date(match.endTime);
 
-    if (now >= endTime && match.state !== 'ended') {
+    // Only mark ended when a winner is declared or it's a draw
+    if (now >= endTime && match.state !== 'ended' && (match.winnerTeam || match.draw)) {
       match.state = 'ended';
       updated = true;
       
@@ -295,5 +397,9 @@ module.exports = {
   calculateAndSavePayouts,
   getUserBetForMatch,
   placeBet,
-  removeBet
+  removeBet,
+  getContests,
+  getContest,
+  getContestMatches,
+  getContestStats
 };

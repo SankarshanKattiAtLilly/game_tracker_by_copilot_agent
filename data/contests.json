@@ -1,0 +1,46 @@
+[
+  {
+    "id": "c1",
+    "name": "Premier League Tournament",
+    "description": "Annual championship tournament featuring top teams",
+    "startDate": "2025-10-17T00:00:00Z",
+    "endDate": "2025-10-22T23:59:59Z",
+    "status": "completed",
+    "totalMatches": 4,
+    "completedMatches": 4,
+    "totalGamePoints": 17
+  },
+  {
+    "id": "c2",
+    "name": "Championship Cup",
+    "description": "Elite teams competing for the championship title",
+    "startDate": "2025-11-20T00:00:00Z",
+    "endDate": "2025-11-25T23:59:59Z",
+    "status": "active",
+    "totalMatches": 5,
+    "completedMatches": 2,
+    "totalGamePoints": 22
+  },
+  {
+    "id": "c3",
+    "name": "Winter Classic",
+    "description": "Seasonal tournament with exciting matchups",
+    "startDate": "2025-11-25T00:00:00Z",
+    "endDate": "2025-12-05T23:59:59Z",
+    "status": "upcoming",
+    "totalMatches": 3,
+    "completedMatches": 0,
+    "totalGamePoints": 18
+  },
+  {
+    "id": "c4",
+    "name": "Mega Championship",
+    "description": "The biggest tournament of the year with high stakes",
+    "startDate": "2025-11-21T00:00:00Z",
+    "endDate": "2025-11-30T23:59:59Z",
+    "status": "active",
+    "totalMatches": 6,
+    "completedMatches": 1,
+    "totalGamePoints": 45
+  }
+]

@@ -74,17 +74,21 @@ class CSVSync {
       const matchData = await this.readCSV(this.csvFiles.matches);
       const currentMatches = await getMatches();
       
-      const newMatches = matchData.map(row => ({
-        id: row.id,
-        team1: row.team1,
-        team2: row.team2,
-        startTime: row.startTime,
-        endTime: row.endTime,
-        state: row.state || 'planned',
-        weight: parseInt(row.weight) || 1,
-        winnerTeam: row.winnerTeam || null,
-        draw: row.draw === 'true'
-      }));
+      const newMatches = matchData.map(row => {
+        const existing = currentMatches.find(m => m.id === row.id) || {};
+        return {
+          id: row.id,
+          contestId: row.contestId || existing.contestId || null,
+          team1: row.team1,
+          team2: row.team2,
+          startTime: row.startTime,
+          endTime: row.endTime,
+          state: row.state || existing.state || 'planned',
+          weight: parseInt(row.weight) || existing.weight || 1,
+          winnerTeam: row.winnerTeam || existing.winnerTeam || null,
+          draw: (row.draw !== undefined ? row.draw === 'true' : !!existing.draw)
+        };
+      });
 
       // Check for newly ended matches to trigger default bets
       const newlyEndedMatches = [];
@@ -157,8 +161,8 @@ class CSVSync {
 
       // Export matches
       const matches = await getMatches();
-      const matchesCsv = 'id,team1,team2,startTime,endTime,state,weight,winnerTeam,draw\n' +
-        matches.map(m => `${m.id},${m.team1},${m.team2},${m.startTime},${m.endTime},${m.state},${m.weight},${m.winnerTeam || ''},${m.draw}`).join('\n');
+      const matchesCsv = 'id,contestId,team1,team2,startTime,endTime,state,weight,winnerTeam,draw\n' +
+        matches.map(m => `${m.id},${m.contestId || ''},${m.team1},${m.team2},${m.startTime},${m.endTime},${m.state},${m.weight},${m.winnerTeam || ''},${m.draw}`).join('\n');
       fs.writeFileSync(this.csvFiles.matches, matchesCsv);
 
       console.log('📤 Data exported to CSV files successfully');

@@ -1,1 +1,48 @@
-[]
+[
+  {
+    "matchId": "m4",
+    "matchWeight": 5,
+    "winnerTeam": "Tigers",
+    "isDraw": false,
+    "calculatedAt": "2025-11-21T10:28:34.956Z",
+    "totalPool": 30,
+    "rewardPerWinner": 0,
+    "winners": [],
+    "losers": [
+      "alice",
+      "bob",
+      "grace",
+      "henry",
+      "charlie",
+      "jk"
+    ],
+    "summary": {
+      "totalBets": 6,
+      "winningBets": 0,
+      "losingBets": 6,
+      "message": "No winners - no rewards distributed"
+    }
+  },
+  {
+    "matchId": "m5",
+    "matchWeight": 3,
+    "winnerTeam": "Lions",
+    "isDraw": false,
+    "calculatedAt": "2025-11-21T10:28:34.957Z",
+    "totalPool": 12,
+    "rewardPerWinner": 0,
+    "winners": [],
+    "losers": [
+      "alice",
+      "bob",
+      "charlie",
+      "jk"
+    ],
+    "summary": {
+      "totalBets": 4,
+      "winningBets": 0,
+      "losingBets": 4,
+      "message": "No winners - no rewards distributed"
+    }
+  }
+]

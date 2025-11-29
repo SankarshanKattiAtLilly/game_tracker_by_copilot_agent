@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useAuth } from '../context/useAuth';
 import { apiClient } from '../api/client';
 import MatchCard from '../components/MatchCard';
 import './Matches.css';
 
 const Matches = () => {
+  const { contestId } = useParams();
+  const [contest, setContest] = useState(null);
   const [matches, setMatches] = useState([]);
   const [bets, setBets] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,11 +17,13 @@ const Matches = () => {
   const fetchData = async () => {
     try {
       setError(null);
-      const [matchesData, betsData] = await Promise.all([
-        apiClient.getMatches(),
+      const [contestData, matchesData, betsData] = await Promise.all([
+        apiClient.getContest(contestId),
+        apiClient.getContestMatches(contestId),
         apiClient.getBets()
       ]);
       
+      setContest(contestData);
       setMatches(matchesData);
       setBets(betsData);
     } catch (err) {
@@ -30,12 +34,18 @@ const Matches = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    if (contestId) {
+      fetchData();
+    }
     
     // Refresh data every 30 seconds
-    const interval = setInterval(fetchData, 30000);
+    const interval = setInterval(() => {
+      if (contestId) {
+        fetchData();
+      }
+    }, 30000);
     return () => clearInterval(interval);
-  }, []);
+  }, [contestId]);
 
   const handleBetUpdate = () => {
     fetchData();
@@ -77,8 +87,9 @@ const Matches = () => {
       <header className="matches-header">
         <div className="header-content">
           <div className="header-title">
-            <h1>🎯 Match Betting</h1>
-            <p>Welcome back, <strong>{user.username}</strong>!</p>
+            <Link to="/contests" className="back-link">← Back to Contests</Link>
+            <h1>🎯 {contest?.name || 'Loading...'}</h1>
+            <p>{contest?.description || 'Loading contest details...'}</p>
           </div>
           <div className="header-actions">
             <button onClick={fetchData} className="refresh-button" title="Refresh">
@@ -107,7 +118,7 @@ const Matches = () => {
                 />
                 {(match.state === 'ended' || match.state === 'started') && (
                   <div className="match-details-link">
-                    <Link to={`/match/${match.id}`} className="details-button">
+                    <Link to={`/match/${match.id}`} state={{ contestId }} className="details-button">
                       {match.state === 'started' ? 'View Live Details' : 'View Details'}
                     </Link>
                   </div>

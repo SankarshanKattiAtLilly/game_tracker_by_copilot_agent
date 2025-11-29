@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, Link, Navigate, useLocation } from 'react-router-dom';
 import { apiClient } from '../api/client';
 import './MatchDetails.css';
 
 const MatchDetails = () => {
   const { id } = useParams();
+  const location = useLocation();
+  const fromContestId = location.state?.contestId || null;
   const [match, setMatch] = useState(null);
   const [bets, setBets] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -51,8 +53,8 @@ const MatchDetails = () => {
       <div className="match-details-container">
         <div className="error">
           <p>Error loading match: {error}</p>
-          <Link to="/matches" className="back-button">
-            Back to Matches
+          <Link to="/contests" className="back-button">
+            Back to Contests
           </Link>
         </div>
       </div>
@@ -64,8 +66,8 @@ const MatchDetails = () => {
       <div className="match-details-container">
         <div className="error">
           <p>Match not found</p>
-          <Link to="/matches" className="back-button">
-            Back to Matches
+          <Link to="/contests" className="back-button">
+            Back to Contests
           </Link>
         </div>
       </div>
@@ -74,7 +76,7 @@ const MatchDetails = () => {
 
   // Only allow viewing details for started or ended matches
   if (match.state === 'planned') {
-    return <Navigate to="/matches" replace />;
+    return <Navigate to="/contests" replace />;
   }
 
   const formatDateTime = (dateString) => {
@@ -105,19 +107,34 @@ const MatchDetails = () => {
     <div className="match-details-container">
       <div className="match-details-content">
         <div className="back-navigation">
-          <Link to="/matches" className="back-link">
-            ← Back to Matches
+          <Link 
+            to={fromContestId ? `/contest/${fromContestId}` : (match?.contestId ? `/contest/${match.contestId}` : '/contests')} 
+            className="back-link"
+          >
+            ← Back to {fromContestId || match?.contestId ? 'Contest' : 'Contests'}
           </Link>
         </div>
 
         <div className="match-info-card">
           <div className="match-header-details">
             <div className="match-id-details">Match {match.id}</div>
+            {match.contestId && (
+              <div className="contest-info">
+                Contest: {match.contestId.toUpperCase()}
+              </div>
+            )}
           </div>
           <div className="match-title">
             <h1>{match.team1} vs {match.team2}</h1>
             <div className="match-weight">Game Points: {match.weight}</div>
           </div>
+
+          {/* Explicit winner info banner */}
+          {match.state === 'ended' && !match.draw && match.winnerTeam && (
+            <div className="winner-banner">
+              <strong>Winner:</strong> {match.winnerTeam}
+            </div>
+          )}
 
           <div className="match-times">
             <div className="time-info">
@@ -169,25 +186,32 @@ const MatchDetails = () => {
                 ) : (
                   <ul>
                     {team1Bets.map((bet, index) => {
-                      // Find the specific payout for this user from payoutUtils calculation
                       const payout = match.payout;
                       const potentialPayout = match.potentialPayouts?.[match.team1];
-                      
+                      const userFinal = payout?.payouts?.find(p => p.username === bet.username);
+                      const finalReward = userFinal ? userFinal.reward : null;
+
                       return (
                         <li key={index} className={bet.isDefault ? 'default-bet' : ''}>
                           <div className="bet-user-info">
                             {/* Show potential payout for live matches */}
                             {match.state === 'started' && potentialPayout && (
                               <span className="potential-reward">
-                                +{potentialPayout.rewardPerWinner.toFixed(1)} pts -
+                                {bet.team === match.team1 
+                                  ? `+${potentialPayout.rewardPerWinner.toFixed(1)} pts -`
+                                  : `-${match.weight} pts -`
+                                }
                               </span>
                             )}
                             {/* Show actual winnings for ended matches based on payoutUtils calculation */}
                             {match.state === 'ended' && payout && (
-                              <span className={`actual-reward ${bet.team === match.winnerTeam ? 'winner' : 'loser'}`}>
-                                {bet.team === match.winnerTeam && payout.rewardPerWinner > 0 
-                                  ? `+${payout.rewardPerWinner.toFixed(1)} pts -` 
-                                  : '0 pts -'
+                              <span className={`actual-reward ${finalReward > 0 ? 'winner' : (finalReward < 0 ? 'loser' : '')}`}>
+                                {finalReward !== null
+                                  ? `${finalReward > 0 ? '+' : ''}${finalReward % 1 === 0 ? finalReward : finalReward.toFixed(1)} pts -`
+                                  : (bet.team === match.winnerTeam && payout.rewardPerWinner > 0
+                                      ? `+${payout.rewardPerWinner.toFixed(1)} pts -`
+                                      : `-${match.weight} pts -`
+                                    )
                                 }
                               </span>
                             )}
@@ -217,9 +241,10 @@ const MatchDetails = () => {
                 ) : (
                   <ul>
                     {team2Bets.map((bet, index) => {
-                      // Find the specific payout for this user from payoutUtils calculation
                       const payout = match.payout;
                       const potentialPayout = match.potentialPayouts?.[match.team2];
+                      const userFinal = payout?.payouts?.find(p => p.username === bet.username);
+                      const finalReward = userFinal ? userFinal.reward : null;
 
                       return (
                         <li key={index} className={bet.isDefault ? 'default-bet' : ''}>
@@ -227,15 +252,21 @@ const MatchDetails = () => {
                             {/* Show potential payout for live matches */}
                             {match.state === 'started' && potentialPayout && (
                               <span className="potential-reward">
-                                +{potentialPayout.rewardPerWinner.toFixed(1)} pts -
+                                {bet.team === match.team2 
+                                  ? `+${potentialPayout.rewardPerWinner.toFixed(1)} pts -`
+                                  : `-${match.weight} pts -`
+                                }
                               </span>
                             )}
                             {/* Show actual winnings for ended matches based on payoutUtils calculation */}
                             {match.state === 'ended' && payout && (
-                              <span className={`actual-reward ${bet.team === match.winnerTeam ? 'winner' : 'loser'}`}>
-                                {bet.team === match.winnerTeam && payout.rewardPerWinner > 0 
-                                  ? `+${payout.rewardPerWinner.toFixed(1)} pts -` 
-                                  : '0 pts -'
+                              <span className={`actual-reward ${finalReward > 0 ? 'winner' : (finalReward < 0 ? 'loser' : '')}`}>
+                                {finalReward !== null
+                                  ? `${finalReward > 0 ? '+' : ''}${finalReward % 1 === 0 ? finalReward : finalReward.toFixed(1)} pts -`
+                                  : (bet.team === match.winnerTeam && payout.rewardPerWinner > 0
+                                      ? `+${payout.rewardPerWinner.toFixed(1)} pts -`
+                                      : `-${match.weight} pts -`
+                                    )
                                 }
                               </span>
                             )}

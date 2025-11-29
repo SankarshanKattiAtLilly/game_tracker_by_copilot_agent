@@ -1,0 +1,9 @@
+.site-header { position: sticky; top: 0; z-index: 10; background: #111827; color: #fff; border-bottom: 1px solid #1f2937; }
+.header-inner { max-width: 1100px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; }
+.brand-link { color: #fff; text-decoration: none; font-weight: 600; }
+.nav { display: flex; gap: 12px; }
+.nav-link { color: #e5e7eb; text-decoration: none; padding: 6px 8px; border-radius: 6px; }
+.nav-link.active { background: #374151; color: #fff; }
+.actions { display: flex; gap: 8px; }
+.logout-button { background: #b00020; color: #fff; border: none; border-radius: 6px; padding: 6px 10px; cursor: pointer; }
+.logout-button:hover { opacity: 0.9; }

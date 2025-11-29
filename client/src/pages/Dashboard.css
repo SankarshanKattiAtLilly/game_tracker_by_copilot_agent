@@ -1,0 +1,17 @@
+/* Basic centered container styling */
+.dashboard-container { display: flex; justify-content: center; padding: 24px; }
+.dashboard-content { width: 100%; max-width: 1000px; }
+.header { margin-bottom: 16px; }
+.summary-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+.card { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; }
+.card-title { font-size: 0.9rem; color: #555; }
+.card-value { font-size: 1.2rem; font-weight: 600; }
+.card-value.positive { color: #0a7d35; }
+.card-value.negative { color: #b00020; }
+.history-section { margin-top: 12px; }
+.history-table { width: 100%; border-collapse: collapse; }
+.history-table th, .history-table td { border: 1px solid #e5e7eb; padding: 8px; text-align: left; }
+.history-table th { background: #f8fafc; }
+.loading, .error { padding: 8px; }
+.back-link { display: inline-block; margin-top: 8px; }
+@media (min-width: 1200px) { .summary-cards { grid-template-columns: repeat(6, 1fr); } }

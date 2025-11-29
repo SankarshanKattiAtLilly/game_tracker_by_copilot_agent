@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/useAuth';
 import './Login.css';
 
@@ -10,12 +10,17 @@ const Login = () => {
   
   const { login, isAuthenticated, loading, error, clearError } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from || null;
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/matches');
+      // Prefer redirecting to attempted route or lastPath
+      const stored = window.localStorage.getItem('lastPath');
+      const target = from || stored || '/contests';
+      navigate(target, { replace: true });
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate, from]);
 
   useEffect(() => {
     if (error) {

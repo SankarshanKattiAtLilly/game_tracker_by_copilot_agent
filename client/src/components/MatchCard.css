@@ -2,10 +2,13 @@
   background: white;
   border-radius: 12px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  padding: 20px;
-  margin-bottom: 16px;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
   border-left: 4px solid #e5e7eb;
-  transition: all 0.2s;
+  transition: box-shadow 0.2s, transform 0.2s;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 12px;
 }
 
 .match-card:hover {
@@ -33,10 +36,10 @@
 }
 
 .match-header-top {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
-  margin-bottom: 12px;
+  gap: 8px;
 }
 
 .match-id {
@@ -51,16 +54,19 @@
 }
 
 .match-teams {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
+  gap: 8px;
 }
 
 .team-name {
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
   color: #1f2937;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .vs {
@@ -79,11 +85,11 @@
 }
 
 .match-details {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
-  margin-bottom: 16px;
-  padding-bottom: 16px;
+  gap: 8px;
+  padding-bottom: 12px;
   border-bottom: 1px solid #e5e7eb;
 }
 
@@ -105,10 +111,11 @@
 }
 
 .match-status {
-  padding: 6px 12px;
+  padding: 4px 10px;
   border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 600;
+  justify-self: end;
 }
 
 .status-open {
@@ -132,14 +139,14 @@
 }
 
 .current-bet {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 8px;
   background: #f0f9ff;
   border: 1px solid #bae6fd;
-  padding: 12px 16px;
+  padding: 10px 12px;
   border-radius: 8px;
-  margin-bottom: 16px;
 }
 
 .bet-label {
@@ -181,14 +188,14 @@
 .betting-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 10px;
 }
 
 .bet-button {
   background: #667eea;
   color: white;
   border: none;
-  padding: 12px 16px;
+  padding: 10px 12px;
   border-radius: 8px;
   font-weight: 500;
   cursor: pointer;

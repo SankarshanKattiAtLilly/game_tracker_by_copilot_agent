@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 class ApiClient {
   constructor() {
@@ -88,6 +88,28 @@ class ApiClient {
 
   async getBets() {
     return this.request('/bets');
+  }
+
+  // Contest endpoints
+  async getContests() {
+    return this.request('/contests');
+  }
+
+  async getContest(contestId) {
+    return this.request(`/contests/${contestId}`);
+  }
+
+  async getContestMatches(contestId) {
+    return this.request(`/contests/${contestId}/matches`);
+  }
+
+  async getContestStats(contestId) {
+    return this.request(`/contests/${contestId}/stats`);
+  }
+
+  // User endpoints
+  async getUserStats() {
+    return this.request('/users/me/stats');
   }
 }
 

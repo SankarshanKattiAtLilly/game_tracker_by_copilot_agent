@@ -1,0 +1,223 @@
+/* Global responsive utilities */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Container utilities for responsive design - Bootstrap inspired */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.container-sm {
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.container-md {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.container-lg {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.container-xl {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.container-xxl {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.container-fluid {
+  width: 100%;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+/* Enhanced laptop-specific container */
+.laptop-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 32px;
+  box-sizing: border-box;
+}
+
+.container-fluid {
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* Bootstrap-style responsive breakpoints */
+@media (min-width: 576px) {
+  .container-sm,
+  .container,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl {
+    padding: 0 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl {
+    padding: 0 32px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container,
+  .container-lg,
+  .container-xl,
+  .container-xxl {
+    padding: 0 40px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container,
+  .container-xl,
+  .container-xxl {
+    padding: 0 48px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container,
+  .container-xxl {
+    padding: 0 56px;
+  }
+}
+
+/* Laptop screens specific */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .laptop-container {
+    max-width: 900px;
+    padding: 0 40px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .laptop-container {
+    max-width: 90%;
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container,
+  .container-fluid {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container,
+  .container-fluid {
+    padding: 0 12px;
+  }
+}
+
+/* Utility classes for responsive design */
+.w-full {
+  width: 100%;
+}
+
+.max-w-full {
+  max-width: 100%;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Mobile-first responsive grid */
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, 1fr);
+}
+
+@media (min-width: 768px) {
+  .md\\:grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .md\\:grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\\:grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Responsive text sizes */
+.text-responsive {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+}
+
+.heading-responsive {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+/* Laptop-optimized centering utilities */
+.laptop-centered {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.laptop-padding {
+  padding: 0 40px;
+}
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .laptop-optimized {
+    max-width: 85vw;
+    margin: 0 auto;
+  }
+}
