@@ -1,12 +1,73 @@
 const express = require('express');
 const router = express.Router();
-const { getContests, getContest, getContestMatches, getContestStats } = require('../utils/data');
+const { getContests, getContest, getContestMatches, getContestStats, getMatches } = require('../utils/data');
+
+// Helper to derive dynamic contest metrics from its matches
+const deriveContestFields = (contest, allMatches) => {
+  // Use existing helper to include fallback window logic if no explicit contestId matches
+  let contestMatches = allMatches.filter(m => m.contestId === contest.id);
+  if (contestMatches.length === 0) {
+    // Fallback: date window (same logic as getContestMatches)
+    try {
+      const start = new Date(contest.startDate).getTime();
+      const end = new Date(contest.endDate).getTime();
+      contestMatches = allMatches.filter(m => {
+        const st = new Date(m.startTime).getTime();
+        return st >= start && st <= end;
+      });
+    } catch (_) {
+      contestMatches = [];
+    }
+  }
+  const totalMatches = contestMatches.length;
+  const completedMatches = contestMatches.filter(m => m.state === 'ended').length;
+  const startedMatches = contestMatches.filter(m => m.state === 'started').length;
+  const totalGamePoints = contestMatches.reduce((sum, m) => sum + (typeof m.weight === 'number' ? m.weight : 0), 0);
+  const percentComplete = totalMatches > 0 ? (completedMatches / totalMatches) * 100 : 0;
+  const remainingMatches = totalMatches - completedMatches;
+
+  // Dynamic status override (upcoming / active / completed)
+  const now = Date.now();
+  const startTs = new Date(contest.startDate).getTime();
+  const endTs = new Date(contest.endDate).getTime();
+  let dynamicStatus = contest.status;
+  if (totalMatches > 0) {
+    if (completedMatches === totalMatches) {
+      dynamicStatus = 'completed';
+    } else if (now < startTs) {
+      dynamicStatus = 'upcoming';
+    } else if (now > endTs) {
+      // After end but not all marked ended -> treat as completed if mostly done
+      dynamicStatus = completedMatches > 0 ? 'completed' : 'upcoming';
+    } else {
+      dynamicStatus = 'active';
+    }
+  }
+
+  return {
+    totalMatches,
+    completedMatches,
+    startedMatches,
+    remainingMatches,
+    totalGamePoints,
+    percentComplete: Math.round(percentComplete),
+    dynamicStatus
+  };
+};
 
 // Get all contests
 router.get('/', async (req, res) => {
   try {
     const contests = await getContests();
-    res.json(contests);
+    const matches = await getMatches();
+    const enriched = contests.map(c => {
+      const derived = deriveContestFields(c, matches);
+      return {
+        ...c,
+        ...derived
+      };
+    });
+    res.json(enriched);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -19,7 +80,12 @@ router.get('/:id', async (req, res) => {
     if (!contest) {
       return res.status(404).json({ error: 'Contest not found' });
     }
-    res.json(contest);
+    const matches = await getMatches();
+    const derived = deriveContestFields(contest, matches);
+    res.json({
+      ...contest,
+      ...derived
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

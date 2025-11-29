@@ -6,9 +6,9 @@
     "startDate": "2025-10-17T00:00:00Z",
     "endDate": "2025-10-22T23:59:59Z",
     "status": "completed",
-    "totalMatches": 4,
-    "completedMatches": 4,
-    "totalGamePoints": 17
+    "totalMatches": 0,
+    "completedMatches": 0,
+    "totalGamePoints": 0
   },
   {
     "id": "c2",
@@ -17,9 +17,9 @@
     "startDate": "2025-11-20T00:00:00Z",
     "endDate": "2025-11-25T23:59:59Z",
     "status": "active",
-    "totalMatches": 5,
-    "completedMatches": 2,
-    "totalGamePoints": 22
+    "totalMatches": 0,
+    "completedMatches": 0,
+    "totalGamePoints": 0
   },
   {
     "id": "c3",
@@ -28,9 +28,9 @@
     "startDate": "2025-11-25T00:00:00Z",
     "endDate": "2025-12-05T23:59:59Z",
     "status": "upcoming",
-    "totalMatches": 3,
+    "totalMatches": 0,
     "completedMatches": 0,
-    "totalGamePoints": 18
+    "totalGamePoints": 0
   },
   {
     "id": "c4",
@@ -39,9 +39,9 @@
     "startDate": "2025-11-21T00:00:00Z",
     "endDate": "2025-11-30T23:59:59Z",
     "status": "active",
-    "totalMatches": 6,
-    "completedMatches": 1,
-    "totalGamePoints": 45
+    "totalMatches": 0,
+    "completedMatches": 0,
+    "totalGamePoints": 0
   },
   {
     "id": "c5",
@@ -50,8 +50,8 @@
     "startDate": "2026-02-01T00:00:00Z",
     "endDate": "2026-02-26T23:59:59Z",
     "status": "upcoming",
-    "totalMatches": 20,
+    "totalMatches": 0,
     "completedMatches": 0,
-    "totalGamePoints": 80
+    "totalGamePoints": 0
   }
 ]
