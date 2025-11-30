@@ -1,32 +1,53 @@
 [
   {
-    "name": "Lions"
+    "name": "RCB"
   },
   {
-    "name": "Tigers"
+    "name": "KKR"
   },
   {
-    "name": "Eagles"
+    "name": "MI"
   },
   {
-    "name": "Sharks"
+    "name": "SRH"
   },
   {
-    "name": "Bangalore"
+    "name": "CSK"
   },
   {
-    "name": "Mumbai"
+    "name": "PBKS"
   },
   {
-    "name": "Chennai"
+    "name": "GT"
   },
   {
-    "name": "Delhi"
+    "name": "RR"
   },
   {
-    "name": "Kolkata"
+    "name": "LSG"
   },
   {
-    "name": "Royal Challengers"
+    "name": "DC"
+  },
+  {
+    "name": "IND"
+  },
+  {
+    "name": "PAK"
+  },
+  {
+    "name": "OMAN"
+  },
+  {
+    "name": "BNG"
+  },
+  {
+    "name": "HK"
+  },
+  {
+    "name": "SL"
+  },
+  {
+    "name": "UAE"
   }
 ]

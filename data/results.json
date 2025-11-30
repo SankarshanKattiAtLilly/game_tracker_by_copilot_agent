@@ -44,5 +44,447 @@
       "losingBets": 4,
       "message": "No winners - no rewards distributed"
     }
+  },
+  {
+    "matchId": "m10",
+    "matchWeight": 50,
+    "winnerTeam": "DC",
+    "isDraw": false,
+    "calculatedAt": "2025-11-30T05:29:06.092Z",
+    "totalPool": 1000,
+    "rewardPerWinner": 200,
+    "winners": [
+      "Jayer",
+      "Malix",
+      "Prnjo",
+      "Surin",
+      "Praso"
+    ],
+    "losers": [
+      "Akzo",
+      "Dynev",
+      "Aksyn",
+      "Vijro",
+      "Ravin",
+      "Amiko",
+      "Dyaku",
+      "Vikro",
+      "Chano",
+      "Adyte",
+      "Ravix",
+      "Prapo",
+      "Kiran",
+      "Mangy",
+      "Prash",
+      "Sujak",
+      "Pradu",
+      "Prajn",
+      "Prago",
+      "Dinep"
+    ],
+    "payouts": [
+      {
+        "username": "Jayer",
+        "team": "DC",
+        "reward": 200,
+        "isWinner": true,
+        "isDefault": false
+      },
+      {
+        "username": "Akzo",
+        "team": "SRH",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Malix",
+        "team": "DC",
+        "reward": 200,
+        "isWinner": true,
+        "isDefault": false
+      },
+      {
+        "username": "Prnjo",
+        "team": "DC",
+        "reward": 200,
+        "isWinner": true,
+        "isDefault": false
+      },
+      {
+        "username": "Surin",
+        "team": "DC",
+        "reward": 200,
+        "isWinner": true,
+        "isDefault": false
+      },
+      {
+        "username": "Dynev",
+        "team": "SRH",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Aksyn",
+        "team": "SRH",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Vijro",
+        "team": "SRH",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Ravin",
+        "team": "SRH",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Amiko",
+        "team": "SRH",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Dyaku",
+        "team": "SRH",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Praso",
+        "team": "DC",
+        "reward": 200,
+        "isWinner": true,
+        "isDefault": false
+      },
+      {
+        "username": "Vikro",
+        "team": "SRH",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Chano",
+        "team": "SRH",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Adyte",
+        "team": "SRH",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Ravix",
+        "team": "SRH",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Prapo",
+        "team": "SRH",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Kiran",
+        "team": "SRH",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Mangy",
+        "team": "SRH",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Prash",
+        "team": "SRH",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Sujak",
+        "team": "SRH",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Pradu",
+        "team": "SRH",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Prajn",
+        "team": "SRH",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Prago",
+        "team": "SRH",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": true
+      },
+      {
+        "username": "Dinep",
+        "team": "SRH",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": true
+      }
+    ],
+    "summary": {
+      "totalBets": 25,
+      "winningBets": 5,
+      "losingBets": 20,
+      "message": "5 winner(s) share 1000 points (200 each)"
+    }
+  },
+  {
+    "matchId": "m11",
+    "matchWeight": 50,
+    "winnerTeam": "RR",
+    "isDraw": false,
+    "calculatedAt": "2025-11-30T05:29:06.093Z",
+    "totalPool": 550,
+    "rewardPerWinner": 39.285714285714285,
+    "winners": [
+      "Jayer",
+      "Malix",
+      "Surin",
+      "Vijro",
+      "Dyaku",
+      "Praso",
+      "Chano",
+      "Adyte",
+      "Ravix",
+      "Prapo",
+      "Kiran",
+      "Mangy",
+      "Sujak",
+      "Prajn"
+    ],
+    "losers": [
+      "Akzo",
+      "Prnjo",
+      "Dynev",
+      "Aksyn",
+      "Ravin",
+      "Amiko",
+      "Vikro",
+      "Prash",
+      "Pradu",
+      "Prago",
+      "Dinep"
+    ],
+    "payouts": [
+      {
+        "username": "Jayer",
+        "team": "RR",
+        "reward": 39.285714285714285,
+        "isWinner": true,
+        "isDefault": false
+      },
+      {
+        "username": "Akzo",
+        "team": "CSK",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Malix",
+        "team": "RR",
+        "reward": 39.285714285714285,
+        "isWinner": true,
+        "isDefault": false
+      },
+      {
+        "username": "Prnjo",
+        "team": "CSK",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Surin",
+        "team": "RR",
+        "reward": 39.285714285714285,
+        "isWinner": true,
+        "isDefault": false
+      },
+      {
+        "username": "Dynev",
+        "team": "CSK",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Aksyn",
+        "team": "CSK",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Vijro",
+        "team": "RR",
+        "reward": 39.285714285714285,
+        "isWinner": true,
+        "isDefault": false
+      },
+      {
+        "username": "Ravin",
+        "team": "CSK",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Amiko",
+        "team": "CSK",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Dyaku",
+        "team": "RR",
+        "reward": 39.285714285714285,
+        "isWinner": true,
+        "isDefault": false
+      },
+      {
+        "username": "Praso",
+        "team": "RR",
+        "reward": 39.285714285714285,
+        "isWinner": true,
+        "isDefault": false
+      },
+      {
+        "username": "Vikro",
+        "team": "CSK",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Chano",
+        "team": "RR",
+        "reward": 39.285714285714285,
+        "isWinner": true,
+        "isDefault": false
+      },
+      {
+        "username": "Adyte",
+        "team": "RR",
+        "reward": 39.285714285714285,
+        "isWinner": true,
+        "isDefault": false
+      },
+      {
+        "username": "Ravix",
+        "team": "RR",
+        "reward": 39.285714285714285,
+        "isWinner": true,
+        "isDefault": false
+      },
+      {
+        "username": "Prapo",
+        "team": "RR",
+        "reward": 39.285714285714285,
+        "isWinner": true,
+        "isDefault": false
+      },
+      {
+        "username": "Kiran",
+        "team": "RR",
+        "reward": 39.285714285714285,
+        "isWinner": true,
+        "isDefault": false
+      },
+      {
+        "username": "Mangy",
+        "team": "RR",
+        "reward": 39.285714285714285,
+        "isWinner": true,
+        "isDefault": false
+      },
+      {
+        "username": "Prash",
+        "team": "CSK",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Sujak",
+        "team": "RR",
+        "reward": 39.285714285714285,
+        "isWinner": true,
+        "isDefault": false
+      },
+      {
+        "username": "Pradu",
+        "team": "CSK",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": false
+      },
+      {
+        "username": "Prajn",
+        "team": "RR",
+        "reward": 39.285714285714285,
+        "isWinner": true,
+        "isDefault": false
+      },
+      {
+        "username": "Prago",
+        "team": "CSK",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": true
+      },
+      {
+        "username": "Dinep",
+        "team": "CSK",
+        "reward": -50,
+        "isWinner": false,
+        "isDefault": true
+      }
+    ],
+    "summary": {
+      "totalBets": 25,
+      "winningBets": 14,
+      "losingBets": 11,
+      "message": "14 winner(s) share 550 points (39.285714285714285 each)"
+    }
   }
 ]
