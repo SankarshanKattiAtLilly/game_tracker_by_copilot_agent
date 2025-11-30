@@ -1,6 +1,2 @@
 id,name,description,startDate,endDate,status
 c1,Premier League Tournament,Annual championship tournament featuring top teams,2025-10-17T00:00:00Z,2025-10-22T23:59:59Z,completed
-c2,Championship Cup,Elite teams competing for the championship title,2025-11-20T00:00:00Z,2025-11-25T23:59:59Z,active
-c3,Winter Classic,Seasonal tournament with exciting matchups,2025-11-25T00:00:00Z,2025-12-05T23:59:59Z,upcoming
-c4,Mega Championship,The biggest tournament of the year with high stakes,2025-11-21T00:00:00Z,2025-11-30T23:59:59Z,active
-c5,IPL League - 2026,Upcoming cricket league with 20 matches (2 per day).,2026-02-01T00:00:00Z,2026-02-26T23:59:59Z,upcoming

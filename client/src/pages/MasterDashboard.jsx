@@ -53,7 +53,7 @@ export default function MasterDashboard() {
             <div className="tile-value">{data.totals.matches}</div>
           </div>
           <div className="tile">
-            <div className="tile-title">Bets</div>
+            <div className="tile-title">Predictions</div>
             <div className="tile-value">{data.totals.bets}</div>
           </div>
         </div>
@@ -83,7 +83,7 @@ export default function MasterDashboard() {
                 <th>Net</th>
                 <th>Longest Win Streak</th>
                 <th>Longest Loss Streak</th>
-                <th>Total Bets</th>
+                <th>Total Predictions</th>
               </tr>
             </thead>
             <tbody>

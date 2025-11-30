@@ -55,8 +55,8 @@ const Login = () => {
     <div className="login-container">
       <div className="login-card">
         <div className="login-header">
-          <h1>🎯 Match Betting</h1>
-          <p>Sign in to place your bets</p>
+          <h1>🎯 Match Prediction</h1>
+          <p>Sign in to make your predictions</p>
         </div>
 
         <form onSubmit={handleSubmit} className="login-form">

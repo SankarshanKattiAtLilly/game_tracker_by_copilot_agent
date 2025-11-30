@@ -13,7 +13,7 @@ export default function Header() {
     <header className="site-header">
       <div className="header-inner">
         <div className="brand">
-          <Link to="/contests" className="brand-link">🎯 Match Betting</Link>
+          <Link to="/contests" className="brand-link">🎯 Match Prediction</Link>
         </div>
         <div className="right-actions">
           {isAuthenticated && (

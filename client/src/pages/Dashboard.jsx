@@ -91,7 +91,7 @@ export default function Dashboard() {
     <div className="dashboard-container">
       <div className="dashboard-content page-container">
         <div className="header">
-          <h1>My Betting Dashboard</h1>
+          <h1>My Prediction Dashboard</h1>
           <p>Overview for <strong>{stats.username}</strong></p>
         </div>
 
@@ -172,7 +172,7 @@ export default function Dashboard() {
           <h2>Match History</h2>
           <div className="history-list">
             {filteredHistory.length === 0 ? (
-              <p>No bets placed yet.</p>
+              <p>No predictions placed yet.</p>
             ) : (
               <table className="history-table">
                 <thead>
@@ -182,7 +182,7 @@ export default function Dashboard() {
                     <th>Teams</th>
                     <th>Weight</th>
                     <th>Outcome</th>
-                    <th>Bet</th>
+                    <th>Prediction</th>
                     <th>Reward</th>
                     <th>Go to</th>
                   </tr>

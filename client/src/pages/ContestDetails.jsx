@@ -138,7 +138,7 @@ const ContestDetails = () => {
               to={`/contest/${contestId}`} 
               className="view-matches-btn"
             >
-              View & Bet on Matches
+              View & Predict Matches
             </Link>
           </div>
         )}

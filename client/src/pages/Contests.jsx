@@ -97,7 +97,7 @@ const Contests = () => {
       <div className="contests-content page-container">
         <div className="contests-header">
           <h1>Contests</h1>
-          <p>Choose a contest to view matches and place bets</p>
+          <p>Choose a contest to view matches and place predictions</p>
         </div>
 
         <div className="contest-tabs">

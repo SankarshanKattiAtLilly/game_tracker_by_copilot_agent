@@ -175,14 +175,14 @@ const MatchDetails = () => {
         </div>
 
         <div className="betting-summary">
-          <h2>Betting Summary</h2>
+          <h2>Prediction Summary</h2>
           
           <div className="teams-betting">
             <div className="team-bets">
-              <h3>{match.team1} ({team1Bets.length} bet{team1Bets.length !== 1 ? 's' : ''})</h3>
+              <h3>{match.team1} ({team1Bets.length} prediction{team1Bets.length !== 1 ? 's' : ''})</h3>
               <div className="bets-list">
                 {team1Bets.length === 0 ? (
-                  <p className="no-bets">No bets placed</p>
+                  <p className="no-bets">No predictions placed</p>
                 ) : (
                   <ul>
                     {team1Bets.map((bet, index) => {
@@ -234,10 +234,10 @@ const MatchDetails = () => {
             </div>
 
             <div className="team-bets">
-              <h3>{match.team2} ({team2Bets.length} bet{team2Bets.length !== 1 ? 's' : ''})</h3>
+              <h3>{match.team2} ({team2Bets.length} prediction{team2Bets.length !== 1 ? 's' : ''})</h3>
               <div className="bets-list">
                 {team2Bets.length === 0 ? (
-                  <p className="no-bets">No bets placed</p>
+                  <p className="no-bets">No predictions placed</p>
                 ) : (
                   <ul>
                     {team2Bets.map((bet, index) => {

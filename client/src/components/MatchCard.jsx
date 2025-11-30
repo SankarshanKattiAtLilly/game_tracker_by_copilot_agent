@@ -116,17 +116,17 @@ const MatchCard = ({ match, userBet, winnersCount = 0, onBetUpdate }) => {
           <span className="time">{startDateTime.time}</span>
         </div>
         <div className={`match-status status-${status}`}>
-          {status === 'open' && 'Open for betting'}
-          {status === 'cutoff' && 'Betting closed'}
+          {status === 'open' && 'Open for predictions'}
+          {status === 'cutoff' && 'Predictions closed'}
           {status === 'live' && 'Live'}
           {status === 'ended' && (
             match.draw ? 'Draw' : `Winner: ${match.winnerTeam}`
           )}
         </div>
         <div className={`user-outcome-pill ${outcome}`}>
-          {outcome === 'yet-to-bet' && 'Yet to bet'}
-          {outcome === 'no-bet' && 'No bet'}
-          {outcome === 'bet-placed' && 'Bet placed'}
+          {outcome === 'yet-to-bet' && 'Yet to predict'}
+          {outcome === 'no-bet' && 'No prediction'}
+          {outcome === 'bet-placed' && 'Prediction placed'}
           {outcome === 'won' && 'You won'}
           {outcome === 'lost' && 'You lost'}
           {outcome === 'no-penalty' && 'No penalty'}
@@ -136,7 +136,7 @@ const MatchCard = ({ match, userBet, winnersCount = 0, onBetUpdate }) => {
 
       {hasUserBet && (
         <div className="current-bet">
-          <span className="bet-label">Your bet:</span>
+          <span className="bet-label">Your prediction:</span>
           <span className={`bet-team ${userBet.isDefault ? 'default-bet' : ''}`}>
             {userBet.team} {userBet.isDefault && '(auto)'}
           </span>
@@ -159,14 +159,14 @@ const MatchCard = ({ match, userBet, winnersCount = 0, onBetUpdate }) => {
             disabled={isPlacingBet}
             className={`bet-button ${hasUserBet && userBet.team === match.team1 ? 'selected' : ''}`}
           >
-            {isPlacingBet ? '...' : `Bet on ${match.team1}`}
+            {isPlacingBet ? '...' : `Predict ${match.team1}`}
           </button>
           <button
             onClick={() => handleBet(match.team2)}
             disabled={isPlacingBet}
             className={`bet-button ${hasUserBet && userBet.team === match.team2 ? 'selected' : ''}`}
           >
-            {isPlacingBet ? '...' : `Bet on ${match.team2}`}
+            {isPlacingBet ? '...' : `Predict ${match.team2}`}
           </button>
         </div>
       )}
