@@ -27,13 +27,16 @@ const getContestMatches = (contestId) => {
     return linked;
   }
 
-  // Fallback: match within contest date window when contestId missing
+  // Fallback: match within contest date window when contestId missing.
+  // Only consider matches that are NOT already assigned to a DIFFERENT contest.
   try {
     const start = new Date(contest.startDate).getTime();
     const end = new Date(contest.endDate).getTime();
     const windowed = matches.filter(m => {
       const st = new Date(m.startTime).getTime();
-      return st >= start && st <= end;
+      const inWindow = st >= start && st <= end;
+      const hasOtherContest = m.contestId && m.contestId !== contestId; // exclude explicitly linked elsewhere
+      return inWindow && !hasOtherContest;
     });
     return windowed;
   } catch (e) {
