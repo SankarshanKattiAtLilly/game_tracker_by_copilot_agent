@@ -3,11 +3,36 @@
     "id": "c1",
     "name": "Premier League Tournament",
     "description": "Annual championship tournament featuring top teams",
-    "startDate": "2025-10-17T00:00:00Z",
-    "endDate": "2025-10-22T23:59:59Z",
     "status": "completed",
     "totalMatches": 0,
     "completedMatches": 0,
     "totalGamePoints": 0
+  },
+  {
+    "id": "c2",
+    "name": "Championship Cup",
+    "description": "Elite teams competing for the championship title",
+    "status": "upcoming",
+    "totalMatches": 0,
+    "completedMatches": 0,
+    "totalGamePoints": 0
+  },
+  {
+    "id": "c5",
+    "name": "IPL League - 2026",
+    "description": "Upcoming cricket league with 20 matches (2 per day).",
+    "status": "upcoming",
+    "totalMatches": 0,
+    "completedMatches": 0,
+    "totalGamePoints": 0
+  },
+  {
+    "id": "sss",
+    "name": "sss",
+    "description": "",
+    "status": "upcoming",
+    "game": "",
+    "teams": [],
+    "enrolledUsers": []
   }
 ]

@@ -20,7 +20,8 @@ export default function Header() {
             <nav className="nav" aria-label="Primary Navigation">
               <Link to="/contests" className={`nav-link ${active('/contests')}`}>Contests</Link>
               <Link to="/dashboard" className={`nav-link ${active('/dashboard')}`}>My Dashboard</Link>
-              <Link to="/admin/dashboard" className={`nav-link ${active('/admin')}`}>Master Dashboard</Link>
+              <Link to="/admin/dashboard" className={`nav-link ${active('/admin/dashboard')}`}>Master Dashboard</Link>
+              <Link to="/admin/manage" className={`nav-link ${active('/admin/manage')}`}>Admin</Link>
             </nav>
           )}
           <div className="actions">

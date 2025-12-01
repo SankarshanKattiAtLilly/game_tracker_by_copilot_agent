@@ -106,6 +106,16 @@ class ApiClient {
   async getContestStats(contestId) {
     return this.request(`/contests/${contestId}/stats`);
   }
+  // Admin helpers (expects Authorization header already configured in request())
+  async adminGet(path) {
+    return this.request(path);
+  }
+  async adminPost(path, body) {
+    return this.request(path, { method: 'POST', body: JSON.stringify(body) });
+  }
+  async adminDelete(path) {
+    return this.request(path, { method: 'DELETE' });
+  }
 
   // User endpoints
   async getUserStats() {

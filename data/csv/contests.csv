@@ -1,2 +1,4 @@
-id,name,description,startDate,endDate,status
-c1,Premier League Tournament,Annual championship tournament featuring top teams,2025-10-17T00:00:00Z,2025-10-22T23:59:59Z,completed
+id,name,description
+c1,Premier League Tournament,Annual championship tournament featuring top teams
+c2,Championship Cup,Elite teams competing for the championship title
+c5,IPL League - 2026,Upcoming cricket league with 20 matches (2 per day).

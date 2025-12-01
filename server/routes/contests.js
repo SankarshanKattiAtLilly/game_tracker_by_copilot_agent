@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getContests, getContest, getContestMatches, getContestStats, getMatches } = require('../utils/data');
+const { getContests, getContest, getContestMatches, getContestStats, getMatches, getComputedContestDates } = require('../utils/data');
 
 // Helper to derive dynamic contest metrics from its matches
 const deriveContestFields = (contest, allMatches) => {
@@ -28,8 +28,9 @@ const deriveContestFields = (contest, allMatches) => {
 
   // Dynamic status override (upcoming / active / completed)
   const now = Date.now();
-  const startTs = new Date(contest.startDate).getTime();
-  const endTs = new Date(contest.endDate).getTime();
+  const computedDates = getComputedContestDates(contest.id);
+  const startTs = computedDates.startDate ? new Date(computedDates.startDate).getTime() : (contest.startDate ? new Date(contest.startDate).getTime() : now + 1);
+  const endTs = computedDates.endDate ? new Date(computedDates.endDate).getTime() : (contest.endDate ? new Date(contest.endDate).getTime() : now - 1);
   let dynamicStatus = contest.status;
   if (totalMatches > 0) {
     if (completedMatches === totalMatches) {
@@ -51,7 +52,9 @@ const deriveContestFields = (contest, allMatches) => {
     remainingMatches,
     totalGamePoints,
     percentComplete: Math.round(percentComplete),
-    dynamicStatus
+    dynamicStatus,
+    computedStartDate: computedDates.startDate,
+    computedEndDate: computedDates.endDate
   };
 };
 

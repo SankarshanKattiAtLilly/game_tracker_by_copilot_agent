@@ -20,9 +20,9 @@ router.post('/login', (req, res) => {
     return res.status(401).json({ error: 'Invalid credentials' });
   }
 
-  // Generate JWT token
+  // Generate JWT token including role if present
   const token = jwt.sign(
-    { username: user.username },
+    { username: user.username, role: user.role || undefined },
     process.env.JWT_SECRET,
     { expiresIn: '24h' }
   );
@@ -33,7 +33,7 @@ router.post('/login', (req, res) => {
   res.json({
     message: 'Login successful',
     token,
-    user: { username: user.username }
+    user: { username: user.username, role: user.role || undefined }
   });
 });
 

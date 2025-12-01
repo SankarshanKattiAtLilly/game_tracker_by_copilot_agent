@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { getUsers } = require('../utils/data');
 
 // JWT-based authentication middleware
 const authenticateToken = (req, res, next) => {
@@ -13,9 +14,27 @@ const authenticateToken = (req, res, next) => {
     if (err) {
       return res.status(403).json({ error: 'Invalid or expired token' });
     }
-    req.user = user;
+    // Attach role if available from users.json
+    try {
+      const users = getUsers();
+      const found = users.find(u => u.username === user.username);
+      const role = (found && found.role) ? found.role : undefined;
+      req.user = { ...user, role };
+    } catch (_) {
+      req.user = user;
+    }
     next();
   });
+};
+
+// Admin guard: either role=admin on user, or username in ADMIN_USERS env list
+const requireAdmin = (req, res, next) => {
+  const adminList = (process.env.ADMIN_USERS || '').split(',').map(s => s.trim()).filter(Boolean);
+  const isAdmin = req.user && (req.user.role === 'admin' || adminList.includes(req.user.username));
+  if (!isAdmin) {
+    return res.status(403).json({ error: 'Admin access required' });
+  }
+  next();
 };
 
 // Session-based authentication middleware (alternative)
@@ -29,5 +48,6 @@ const authenticateSession = (req, res, next) => {
 
 module.exports = {
   authenticateToken,
-  authenticateSession
+  authenticateSession,
+  requireAdmin
 };

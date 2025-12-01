@@ -10,6 +10,11 @@ import './App.css';
 import RoutePersistence from './components/RoutePersistence';
 import Header from './components/Header';
 import MasterDashboard from './pages/MasterDashboard';
+import AdminHome from './pages/admin/AdminHome';
+import AdminContests from './pages/admin/AdminContests';
+import AdminTeams from './pages/admin/AdminTeams';
+import AdminMatches from './pages/admin/AdminMatches';
+import AdminEnrollments from './pages/admin/AdminEnrollments';
 
 function App() {
   return (
@@ -57,6 +62,46 @@ function App() {
               element={
                 <ProtectedRoute>
                   <MasterDashboard />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/admin/manage" 
+              element={
+                <ProtectedRoute>
+                  <AdminHome />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/admin/manage/contests" 
+              element={
+                <ProtectedRoute>
+                  <AdminContests />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/admin/manage/teams" 
+              element={
+                <ProtectedRoute>
+                  <AdminTeams />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/admin/manage/matches" 
+              element={
+                <ProtectedRoute>
+                  <AdminMatches />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/admin/manage/enrollments" 
+              element={
+                <ProtectedRoute>
+                  <AdminEnrollments />
                 </ProtectedRoute>
               } 
             />

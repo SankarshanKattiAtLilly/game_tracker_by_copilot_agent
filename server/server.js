@@ -1,6 +1,6 @@
-// Force-enable CSV sync by default unless explicitly disabled
+// Disable CSV sync by default; enable only if explicitly set to true
 if (!process.env.ENABLE_CSV_SYNC) {
-  process.env.ENABLE_CSV_SYNC = 'true';
+  process.env.ENABLE_CSV_SYNC = 'false';
 }
 const { app, initializeBackgroundProcesses } = require('./app');
 

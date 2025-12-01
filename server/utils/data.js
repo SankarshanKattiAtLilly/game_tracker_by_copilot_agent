@@ -14,6 +14,23 @@ const getContest = (contestId) => {
   return contests.find(contest => contest.id === contestId);
 };
 
+// Get users enrolled for a contest
+const getContestEnrolledUsers = (contestId) => {
+  const contest = getContest(contestId);
+  const enrolled = contest && Array.isArray(contest.enrolledUsers) ? contest.enrolledUsers : [];
+  return enrolled;
+};
+
+// Compute contest start/end based on its matches
+const getComputedContestDates = (contestId) => {
+  const matches = getMatches().filter(m => m.contestId === contestId);
+  if (matches.length === 0) return { startDate: null, endDate: null };
+  const times = matches.map(m => ({ s: new Date(m.startTime).getTime(), e: new Date(m.endTime).getTime() }));
+  const startDate = new Date(Math.min(...times.map(t => t.s))).toISOString();
+  const endDate = new Date(Math.max(...times.map(t => t.e))).toISOString();
+  return { startDate, endDate };
+};
+
 const getContestMatches = (contestId) => {
   const matches = getMatches();
   const contest = getContest(contestId);
@@ -30,8 +47,10 @@ const getContestMatches = (contestId) => {
   // Fallback: match within contest date window when contestId missing.
   // Only consider matches that are NOT already assigned to a DIFFERENT contest.
   try {
-    const start = new Date(contest.startDate).getTime();
-    const end = new Date(contest.endDate).getTime();
+    const computed = getComputedContestDates(contestId);
+    const start = computed.startDate ? new Date(computed.startDate).getTime() : (contest.startDate ? new Date(contest.startDate).getTime() : null);
+    const end = computed.endDate ? new Date(computed.endDate).getTime() : (contest.endDate ? new Date(contest.endDate).getTime() : null);
+    if (start === null || end === null) return [];
     const windowed = matches.filter(m => {
       const st = new Date(m.startTime).getTime();
       const inWindow = st >= start && st <= end;
@@ -73,19 +92,29 @@ const getContestStats = (contestId) => {
     
     // Check if this match has ended and calculate win/loss
     const match = matches.find(m => m.id === bet.matchId);
-    if (match && match.state === 'ended' && !match.draw) {
-      if (bet.team === match.winnerTeam) {
+    if (match && match.state === 'ended') {
+      if (match.draw) {
+        // Draw: no wins/losses increment, reward treated as zero
+        return;
+      }
+      const isWinner = bet.team === match.winnerTeam;
+      if (isWinner) {
         userStats[bet.username].wins++;
-        // Add reward from results if available
-        const matchResult = results.find(r => r.matchId === bet.matchId);
-        if (matchResult && matchResult.payouts) {
-          const userPayout = matchResult.payouts.payouts.find(p => p.username === bet.username);
-          if (userPayout) {
-            userStats[bet.username].totalRewards += userPayout.reward;
-          }
-        }
       } else {
         userStats[bet.username].losses++;
+      }
+      // Add reward from results if available (defensive checks)
+      try {
+        const matchResult = results.find(r => r.matchId === bet.matchId);
+        const payoutsArray = matchResult && matchResult.payouts && Array.isArray(matchResult.payouts.payouts)
+          ? matchResult.payouts.payouts
+          : [];
+        const userPayout = payoutsArray.find(p => p.username === bet.username);
+        if (userPayout && typeof userPayout.reward === 'number') {
+          userStats[bet.username].totalRewards += userPayout.reward;
+        }
+      } catch (err) {
+        console.warn('Safe stats aggregation: payout missing/malformed for match', bet.matchId);
       }
     }
   });
@@ -237,7 +266,9 @@ const assignDefaultBets = (matchId) => {
   const match = getMatchById(matchId);
   if (!match || match.state !== 'ended') return;
 
-  const users = getUsers();
+  // Only enrolled users of the contest need default predictions
+  const contestUsers = match.contestId ? getContestEnrolledUsers(match.contestId) : [];
+  const users = contestUsers.length > 0 ? getUsers().filter(u => contestUsers.includes(u.username)) : [];
   const bets = getBets();
   const now = new Date().toISOString();
 
@@ -279,6 +310,21 @@ const assignDefaultBets = (matchId) => {
   // Calculate and save payout results if match has ended with a result
   if (match.state === 'ended') {
     calculateAndSavePayouts(matchId, match, allBetsForMatch);
+  }
+};
+
+// Simple JSON logging utility
+const logAction = (entry) => {
+  try {
+    const logs = readJSONFile('logs.json');
+    const enriched = { 
+      timestamp: new Date().toISOString(),
+      ...entry 
+    };
+    logs.push(enriched);
+    writeJSONFile('logs.json', logs);
+  } catch (e) {
+    console.error('Failed to write log entry', e);
   }
 };
 
@@ -408,7 +454,10 @@ module.exports = {
   removeBet,
   getContests,
   getContest,
+  getContestEnrolledUsers,
+  getComputedContestDates,
   getContestMatches,
   getContestStats,
-  saveContests
+  saveContests,
+  logAction
 };

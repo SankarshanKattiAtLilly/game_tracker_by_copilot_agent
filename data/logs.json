@@ -1,0 +1,18 @@
+[
+  {
+    "timestamp": "2025-11-30T07:09:06.004Z",
+    "actor": "Jayer",
+    "action": "create",
+    "entity": "contest",
+    "entityId": "sss",
+    "payload": {
+      "id": "sss",
+      "name": "sss",
+      "description": "",
+      "status": "upcoming",
+      "game": "",
+      "teams": [],
+      "enrolledUsers": []
+    }
+  }
+]
